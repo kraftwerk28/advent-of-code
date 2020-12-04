@@ -21,6 +21,10 @@ path = "2/main.rs"
 name = "3"
 path = "3/main.rs"
 
+[[bin]]
+name = "4"
+path = "4/main.rs"
+
 [lib]
 name = "utils"
 path = "utils.rs"

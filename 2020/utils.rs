@@ -1,25 +1,27 @@
 use std::{
+    env,
     fs::File,
     io::{BufRead, BufReader},
 };
 
-pub fn parse<W, T, F>(f: F, tr: T) -> Vec<W>
+pub fn parse<T, F>(f: F) -> Vec<T>
 where
-    T: Fn(String) -> Option<W>,
-    F: Into<&'static str>,
+    F: Fn(String) -> Option<T>,
 {
-    let fpath = f.into();
-    File::open(fpath)
+    env::args()
+        .skip(1)
+        .next()
+        .map(|fpath| File::open(&fpath).expect(format!("Failed to open {}", fpath).as_str()))
         .map(BufReader::new)
         .map(BufReader::lines)
         .map(|lines| {
             lines
                 .filter(Result::is_ok)
                 .map(Result::unwrap)
-                .map(tr)
+                .map(f)
                 .filter(Option::is_some)
                 .map(Option::unwrap)
                 .collect::<Vec<_>>()
         })
-        .expect(format!("Failed to open {}", fpath).as_str())
+        .expect("Usage <executable> <path-to-input")
 }

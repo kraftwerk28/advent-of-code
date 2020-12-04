@@ -45,7 +45,7 @@ fn p2(forest: &Forest) {
 }
 
 fn main() {
-    let forest: Forest = utils::parse("input.txt", |s| {
+    let forest: Forest = utils::parse(|s| {
         let ss = s
             .chars()
             .map(|c| match c {

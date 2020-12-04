@@ -27,7 +27,7 @@ fn p2(rules: &Vec<Rule>) {
 
 fn main() {
     let re = Regex::new(r"^(\d+)-(\d+)\s+(\w):\s+(.+)$").unwrap();
-    let rules = utils::parse("input.txt", |s| {
+    let rules = utils::parse(|s| {
         re.captures(s.as_str()).map(|c| {
             let r = (
                 c[1].parse::<usize>().unwrap(),

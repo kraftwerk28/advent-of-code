@@ -24,7 +24,7 @@ fn s2(numbers: &Vec<i32>) {
     }
 }
 fn main() {
-    let numbers = utils::parse("input.txt", |s| s.parse::<i32>().ok());
+    let numbers = utils::parse(|s| s.parse::<i32>().ok());
     s1(&numbers);
     s2(&numbers);
 }
