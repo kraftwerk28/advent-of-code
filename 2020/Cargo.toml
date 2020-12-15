@@ -33,6 +33,14 @@ path = "5/main.rs"
 name = "6"
 path = "6/main.rs"
 
+[[bin]]
+name = "7"
+path = "7/main.rs"
+
+[[bin]]
+name = "8"
+path = "8/main.rs"
+
 [lib]
 name = "utils"
 path = "utils.rs"
