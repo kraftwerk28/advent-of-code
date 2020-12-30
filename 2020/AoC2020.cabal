@@ -1,0 +1,34 @@
+cabal-version: >=1.10
+name:          AoC2020
+version:       0.1.0.0
+license-file:  LICENSE
+author:        kraftwerk28
+maintainer:    kefirchik3@gmail.com
+build-type:    Simple
+
+executable 9
+  main-is:          9/Main.hs
+  build-depends:    base ==4.14.*
+  default-language: Haskell2010
+
+executable 10
+  main-is:          10/Main.hs
+  build-depends:
+      base        >=4.14    && <4.15
+    , containers  >=0.6.2.1
+    , mtl         >=2.2.2
+
+  default-language: Haskell2010
+
+executable 11
+  main-is:          11/Main.hs
+  build-depends:
+      base   >=4.14    && <4.15
+    , split  ==0.2.3.4
+
+  default-language: Haskell2010
+
+executable 12
+  main-is:          12/Main.hs
+  build-depends:    base ==4.14.*
+  default-language: Haskell2010
