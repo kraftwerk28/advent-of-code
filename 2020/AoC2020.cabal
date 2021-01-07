@@ -32,3 +32,40 @@ executable 12
   main-is:          12/Main.hs
   build-depends:    base ==4.14.*
   default-language: Haskell2010
+
+executable 13
+  main-is:          13/Main.hs
+  build-depends:
+      base   >=4.14    && <4.15
+    , split  ==0.2.3.4
+
+  default-language: Haskell2010
+
+executable 14
+  main-is:          14/Main.hs
+  build-depends:
+      base            >=4.14     && <4.15
+    , containers      ==0.6.2.1
+    , raw-strings-qq  ==1.1
+    , regex-pcre      ==0.95.0.0
+    , split           ==0.2.3.4
+
+  default-language: Haskell2010
+
+executable 15
+  main-is:          15/Main.hs
+  build-depends:
+      base        >=4.14    && <4.15
+    , containers  ==0.6.2.1
+    , split       ==0.2.3.4
+
+  default-language: Haskell2010
+
+executable 16
+  main-is:          16/Main.hs
+  build-depends:
+      base        >=4.14    && <4.15
+    , containers  ==0.6.2.1
+    , split       ==0.2.3.4
+
+  default-language: Haskell2010
