@@ -69,3 +69,13 @@ executable 16
     , split       ==0.2.3.4
 
   default-language: Haskell2010
+
+executable 17
+  main-is:          17/Main.hs
+  build-depends:    base ==4.14.*
+  default-language: Haskell2010
+
+executable 18
+  main-is:          18/Main.hs
+  build-depends:    base ==4.14.*
+  default-language: Haskell2010
