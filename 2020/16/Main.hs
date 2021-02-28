@@ -37,7 +37,7 @@ solve' namesMap names = case nextName of
 
 main :: IO ()
 main = do
-  parts <- getArgs >>= readFile . head <&> splitOn "\n\n"
+  parts <- splitOn "\n\n" <$> (readFile . head =<< getArgs)
 
   let fields    = map parseFields . lines . head $ parts
       fieldsMap = M.fromList fields :: M.Map FieldName [Range]
