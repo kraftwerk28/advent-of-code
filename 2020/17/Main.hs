@@ -79,7 +79,7 @@ pad grid = foldr ($) grid funcs
     funcs = map mapf' directions
     -- TODO: padding doesn't work correctly so I pad just all directions
     -- mapf' dir = if hasCubes $ getSide dir grid then extend dir else id
-    mapf' = extend
+    mapf' = extend 
 
 next :: Grid -> Grid
 next grid = zipWith
