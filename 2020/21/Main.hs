@@ -1,66 +1,69 @@
-import           Data.List                      ( stripPrefix )
+{-# LANGUAGE NamedFieldPuns #-}
+import           Data.Function                  ( on )
+import           Data.List                      ( (\\)
+                                                , intercalate
+                                                , intersect
+                                                , sortBy
+                                                , stripPrefix
+                                                )
 import           Data.List.Split                ( splitOn )
 import           Data.Maybe                     ( fromJust
                                                 , isJust
                                                 )
 import           System.Environment             ( getArgs )
 
-type FoodEntry = ([String], [String])
--- type TagMap = M.Map String [String]
-type TagMap = [(String, [(String, Int)])]
+type Allergen = String
+type Ingredient = String
 
-unique :: (Eq a) => [a] -> [a]
+data FoodEntry = FoodEntry
+  { ingredients :: [Ingredient]
+  , allergenes  :: [Allergen]
+  }
+  deriving Show
+
+unique :: Eq a => [a] -> [a]
+unique [] = []
 unique (x : xs) | x `elem` xs = rest
                 | otherwise   = x : rest
-    where rest = unique xs
-
-alter :: (Eq k) => (Maybe v -> Maybe v) -> k -> [(k, v)] -> [(k, v)]
-alter fn key [] = maybe [] (\val -> [(key, val)]) $ fn Nothing
-alter fn key (pair@(k, v) : xs)
-    | k == key  = maybe xs (\val -> (key, val) : xs) (fn $ Just v)
-    | otherwise = pair : alter fn key xs
+  where rest = unique xs
 
 parseEntry :: String -> FoodEntry
-parseEntry s = (ingredients, allergenes)
-  where
-    (i : a : _) = splitOn " (" s
-    ingredients = words i
-    allergenes  = splitOn ", " . fromJust . stripPrefix "contains " . init $ a
+parseEntry s = FoodEntry { ingredients, allergenes }
+ where
+  (i : a : _) = splitOn " (" s
+  ingredients = words i
+  allergenes  = splitOn ", " . fromJust . stripPrefix "contains " . init $ a
 
-makeMap :: [FoodEntry] -> TagMap
-makeMap = foldl f' []
-  where
-    f' :: TagMap -> FoodEntry -> TagMap
-    f' acc (ingr, aller) = foldl (f'' aller) acc ingr
-    f'' :: [String] -> TagMap -> String -> TagMap
-    f'' = undefined
-    -- f'' allergenes acc ingredient = foldl (alterFn allergenes) acc allergenes
-    -- alterFn :: [String] -> Maybe [String] -> Maybe [String]
-    -- alterFn allergenes Nothing     = Just allergenes
-    -- alterFn allergenes (Just list) = Just $ unique $ allergenes ++ list
-    -- -- f'' allergenes acc ingredient = 
+-- Map all allergenes to possible ingredients that may contain this allergen
+associateIngredients :: [FoodEntry] -> [(Allergen, [Ingredient])]
+associateIngredients entries = map
+  (\allergen -> (allergen, assocIngredient allergen))
+  allAllergenes
+ where
+  allAllergenes = unique $ concatMap allergenes entries
+  assocIngredient allergen = foldl1 intersect $ map ingredients $ filter
+    ((allergen `elem`) . allergenes)
+    entries
 
 main :: IO ()
 main = do
-    contents <- readFile . head =<< getArgs
-    -- let tagged :: M.Map String [String]
-    --     tagged = undefined
-    print $ lines contents
-
--- mxmxvkd (dairy 2, fish 2)
--- kfcds (dairy 1, fish 1)
--- sqjhc (dairy 1, fish 2, soy 1)
--- nhms (dairy 1, fish 1)
--- trh (dairy 1)
--- fvjkl (dairy 1, soy 1)
--- sbzzf (dairy 1, fish 1)
-
--- mxmxvkd (dairy 1, fish 1)
--- kfcds ()
--- sqjhc (fish 1, soy 1)
--- nhms ()
--- trh ()
--- fvjkl (soy 1)
--- sbzzf ()
-
--- kfcds, nhms, sbzzf, trh
+  contents <- readFile . head =<< getArgs
+  let entries        = map parseEntry $ lines contents
+      allIngredients = concatMap ingredients entries
+      allergic       = unique $ concatMap snd $ associateIngredients entries
+      nonAllergic    = unique allIngredients \\ allergic
+  -- Part1
+  print $ length $ filter (`elem` nonAllergic) allIngredients
+  -- Part2
+  -- I did this by hand :)
+  let associated =
+        [ ("peanuts", "xrmxxvn")
+        , ("wheat"  , "jxh")
+        , ("soy"    , "rdfr")
+        , ("dairy"  , "vmhqr")
+        , ("nuts"   , "gnrpml")
+        , ("eggs"   , "qxfzc")
+        , ("sesame" , "rfmvh")
+        , ("fish"   , "khpdjv")
+        ]
+  print $ intercalate "," $ map snd $ sortBy (compare `on` fst) associated
