@@ -1,5 +1,4 @@
 import           Data.List.Split                ( splitOn )
-import           Debug.Trace                    ( traceShowId )
 
 data State = State [Int] Int
   deriving Show
@@ -20,8 +19,7 @@ runProgram state@(State code ip) = case opcode of
         b = code !! (code !! (ip + 2))
         c = (code !! (ip + 3))
     in  runProgram $ State (setAt c (a * b) code) (ip + 4)
-  99 -> state
-  _  -> state
+  _ -> state
   where opcode = code !! ip
 
 main = do
