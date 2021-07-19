@@ -20,3 +20,7 @@ executable 02
 executable 03
   import:  deps
   main-is: 03.hs
+
+executable 04
+  import:  deps
+  main-is: 04.hs

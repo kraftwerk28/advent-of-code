@@ -50,10 +50,3 @@ main = do
 
   print part1
   print part2
-  --     firstIntersection = head intersections
-  --     part2 =
-  --       length (takeWhile (/= firstIntersection) t1)
-  --         + length (takeWhile (/= firstIntersection) t2)
-  --         + 2
-  -- print part2
-  -- print $ minimum $ map (\(x, y) -> abs x + abs y) intersections
