@@ -1,0 +1,18 @@
+cabal-version: 2.4
+name:          AoC2019
+version:       0.1.0.0
+author:        kraftwerk28
+maintainer:    kefirchik3@gmail.com
+
+common deps
+  build-depends:
+    , base   ^>=4.14.1.0
+    , split  ==0.2.3.4
+
+executable 01
+  import:  deps
+  main-is: 01.hs
+
+executable 02
+  import:  deps
+  main-is: 02.hs
