@@ -5,6 +5,7 @@ author:        kraftwerk28
 maintainer:    kefirchik3@gmail.com
 
 common deps
+  other-modules: Intcode
   build-depends:
     , base   ^>=4.14.1.0
     , split  ==0.2.3.4
