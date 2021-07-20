@@ -1,6 +1,5 @@
 import           Data.List.Split                ( splitOn )
 import           Data.Maybe                     ( catMaybes )
-import           Debug.Trace                    ( traceShowId )
 
 -- line: (x1, y1, x2, y2)
 type Line = (Int, Int, Int, Int)

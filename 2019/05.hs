@@ -1,5 +1,4 @@
 import           Data.List.Split                ( splitOn )
-import           Debug.Trace                    ( traceShow )
 
 data State = State [Int] Int [Int] [Int]
   deriving Show

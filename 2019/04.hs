@@ -1,5 +1,5 @@
 import           Data.List                      ( group )
-import           Debug.Trace                    ( traceShowId )
+
 digits 0 = []
 digits x = let (q, r) = x `divMod` 10 in r : digits q
 
