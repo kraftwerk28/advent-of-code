@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+exe=$(printf "%02d" $1)
+if [[ -n $2 ]]; then
+	cat $2 | cabal run $exe
+else
+	cat "input/${exe}.txt" | cabal run $exe
+fi

@@ -1,12 +1,13 @@
 import           Data.List.Split                ( splitOn )
 import           Intcode                        ( State(..)
+                                                , getOutput
                                                 , newState
                                                 , runProgram
                                                 )
 
 main = do
-  nums <- map read . splitOn "," <$> getContents
-  let finState@(State code _ _ output) = runProgram $ newState nums [1]
-  print output
-  let finState@(State code _ _ output) = runProgram $ newState nums [5]
-  print output
+  code <- map read . splitOn "," <$> getContents
+  let output = getOutput $ runProgram $ newState code [1]
+  print (last output)
+  let output = getOutput $ runProgram $ newState code [5]
+  print (last output)

@@ -33,3 +33,11 @@ executable 05
 executable 06
   import:  deps
   main-is: 06.hs
+
+executable 07
+  import:  deps
+  main-is: 07.hs
+
+executable 08
+  import:  deps
+  main-is: 08.hs

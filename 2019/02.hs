@@ -7,13 +7,13 @@ import           Intcode                        ( State(..)
 
 main = do
   nums <- map read . splitOn "," <$> getContents
-  let preparedCode                = setAt 1 12 $ setAt 2 2 nums
-      finState@(State code _ _ _) = runProgram (newState preparedCode [])
+  let preparedCode          = setAt 1 12 $ setAt 2 2 nums
+      State { code = code } = runProgram (newState preparedCode [])
   print $ head code
   let
-    State (_ : noun : verb : _) _ _ _ =
+    State { code = (_ : noun : verb : _) } =
       head
-        . filter ((== 19690720) . (\(State (res : _) _ _ _) -> res))
+        . filter ((== 19690720) . (\State { code = (res : _) } -> res))
         . map (runProgram . (`newState` []))
         $ [ setAt 1 x $ setAt 2 y preparedCode
           | x <- [1 .. 99]
