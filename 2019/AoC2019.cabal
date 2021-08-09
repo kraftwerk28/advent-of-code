@@ -41,3 +41,11 @@ executable 07
 executable 08
   import:  deps
   main-is: 08.hs
+
+executable 09
+  import:  deps
+  main-is: 09.hs
+
+executable 10
+  import:  deps
+  main-is: 10.hs

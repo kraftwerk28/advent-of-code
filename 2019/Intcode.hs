@@ -3,82 +3,79 @@
 
 module Intcode where
 
-data State = State
-  { code   :: [Int]
-  , ip     :: Int
-  , input  :: [Int]
-  , output :: [Int]
-  , halted :: Bool
-  }
-  -- deriving Show
+import           Prelude                 hiding ( (!!) )
 
-instance Show State where
-  show State { input, output, halted } =
-    "State("
-      ++ "input: "
-      ++ show input
-      ++ "; output: "
-      ++ show output
-      ++ "; halted: "
-      ++ show halted
-      ++ ")"
+(!!) :: [Int] -> Int -> Int
+(!!) []           _     = 0
+(!!) (first : _ ) 0     = first
+(!!) (_     : xs) index = xs !! (index - 1)
+
+data State = State
+  { code         :: [Int]
+  , ip           :: Int
+  , input        :: [Int]
+  , output       :: [Int]
+  , halted       :: Bool
+  , relativeBase :: Int
+  }
+  deriving Show
 
 newState :: [Int] -> [Int] -> State
 newState code input =
-  State { code, ip = 0, input, output = [], halted = False }
+  State { code, ip = 0, input, output = [], halted = False, relativeBase = 0 }
 
 setAt :: Int -> Int -> [Int] -> [Int]
-setAt index value list =
-  let (l, r') = splitAt index list in l ++ [value] ++ tail r'
+setAt index value list
+  | index < length list = l ++ [value] ++ tail r'
+  | otherwise           = l ++ replicate (index - length list) 0 ++ [value]
+  where (l, r') = splitAt index list
 
 runProgram :: State -> State
-runProgram state@(State code ip input output halted) = if halted
-  then state
-  else nextState
+runProgram state@State { code, ip, input, output, halted, relativeBase } =
+  if halted then state else nextState
  where
   nextState = case opcode of
-    1 -> runProgram state { code = setAt c (a + b) code, ip = ip + 4 }
-    2 -> runProgram state { code = setAt c (a * b) code, ip = ip + 4 }
+    1 -> runProgram state { code = setAt cPos (a + b) code, ip = ip + 4 }
+    2 -> runProgram state { code = setAt cPos (a * b) code, ip = ip + 4 }
     3 -> case input of
       []       -> state
-      (x : xs) -> runProgram state { code  = setAt (getParam 1 1) x code
+      (x : xs) -> runProgram state { code  = setAt (getPos 1 fstMode) x code
                                    , ip    = ip + 2
                                    , input = xs
                                    }
-    4 -> runProgram state { ip = ip + 2, output = output ++ [getParam 1 0] }
-    5 -> runProgram state
-      { ip = if getParam 1 fstMode /= 0 then getParam 2 sndMode else ip + 3
-      }
-    6 -> runProgram state
-      { ip = if getParam 1 fstMode == 0 then getParam 2 sndMode else ip + 3
-      }
-    7 -> runProgram state
-      { code = setAt
-                 (getParam 3 1)
-                 (if getParam 1 fstMode < getParam 2 sndMode then 1 else 0)
-                 code
-      , ip   = ip + 4
-      }
-    8 -> runProgram state
-      { code = setAt
-                 (getParam 3 1)
-                 (if getParam 1 fstMode == getParam 2 sndMode then 1 else 0)
-                 code
-      , ip   = ip + 4
-      }
+    4 -> runProgram state { ip = ip + 2, output = output ++ [a] }
+    5 -> runProgram state { ip = if a /= 0 then b else ip + 3 }
+    6 -> runProgram state { ip = if a == 0 then b else ip + 3 }
+    7 -> runProgram state { code = setAt cPos (if a < b then 1 else 0) code
+                          , ip   = ip + 4
+                          }
+    8 -> runProgram state { code = setAt cPos (if a == b then 1 else 0) code
+                          , ip   = ip + 4
+                          }
+    9  -> runProgram state { ip = ip + 2, relativeBase = relativeBase + a }
     99 -> state { halted = True }
-    _  -> state { halted = True }
-    -- _  -> error $ "Unexpected opcode: " ++ show opcode
+    _  -> error $ "Unexpected opcode: " ++ show instruction
   instruction = code !! ip
-  opcode      = instruction `rem` 10
+  opcode      = instruction `rem` 100
   fstMode     = instruction `div` 100 `rem` 10
-  sndMode     = instruction `div` 1000
-  getParam :: Int -> Int -> Int
-  getParam n mode =
-    let v = code !! (ip + n) in if mode == 1 then v else code !! v
-  a = getParam 1 fstMode
-  b = getParam 2 sndMode
-  c = getParam 3 1
+  sndMode     = instruction `div` 1000 `rem` 10
+  thirdMode   = instruction `div` 10000
+  getParam at mode =
+    let v = code !! (ip + at)
+    in  case mode of
+          0 -> code !! v
+          1 -> v
+          2 -> code !! (relativeBase + v)
+          _ -> error "Bad parameter mode"
+  getPos at mode =
+    let v = code !! (ip + at)
+    in  case mode of
+          0 -> v
+          2 -> relativeBase + v
+          _ -> error "Bad parameter mode"
+  a    = getParam 1 fstMode
+  b    = getParam 2 sndMode
+  cPos = getPos 3 thirdMode
 
 getOutput :: State -> [Int]
 getOutput State { output } = output

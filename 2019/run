@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-exe=$(printf "%02d" $1)
+exe=$(printf "%02d" ${1#0})
 if [[ -n $2 ]]; then
 	cat $2 | cabal run $exe
 else
