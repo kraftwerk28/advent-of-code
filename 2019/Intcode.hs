@@ -3,6 +3,7 @@
 
 module Intcode where
 
+import           Data.List.Split                ( splitOn )
 import           Prelude                 hiding ( (!!) )
 
 (!!) :: [Int] -> Int -> Int
@@ -79,3 +80,6 @@ runProgram state@State { code, ip, input, output, halted, relativeBase } =
 
 getOutput :: State -> [Int]
 getOutput State { output } = output
+
+readFromStdin :: IO [Int]
+readFromStdin = map read . splitOn "," <$> getContents

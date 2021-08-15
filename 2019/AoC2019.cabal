@@ -49,3 +49,31 @@ executable 09
 executable 10
   import:  deps
   main-is: 10.hs
+
+executable 11
+  import:  deps
+  main-is: 11.hs
+
+executable 12
+  import:  deps
+  main-is: 12.hs
+
+executable 13
+  import:        deps
+  main-is:       13.hs
+  build-depends:
+    , containers
+    , process
+
+executable 14
+  import:  deps
+  main-is: 14.hs
+
+executable 15
+  import:        deps
+  main-is:       15.hs
+  build-depends: containers
+
+executable state-monad
+  import:  deps
+  main-is: StateMonad.hs
