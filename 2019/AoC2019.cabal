@@ -74,6 +74,11 @@ executable 15
   main-is:       15.hs
   build-depends: containers
 
-executable state-monad
+executable 16
+  import:        deps
+  main-is:       16.hs
+  build-depends: containers
+
+executable 17
   import:  deps
-  main-is: StateMonad.hs
+  main-is: 17.hs
