@@ -121,13 +121,13 @@ main = do
         '>' -> E
         '<' -> W
   -- putStrLn (pictureToString $ getOutput $ runProgram intcode)
-  -- print (part1 intcode)
+  print (part1 intcode)
   let pieces = getScaffoldPaths droidPosition
                                 droidDirection
                                 (getScaffoldPoints intcode)
-  mapM_ print pieces
+  -- mapM_ print pieces
   let commands = pathPiecesToCommands pieces
-  mapM_ print commands
+  -- mapM_ print commands
 
   let manualInputs =
         [ "A,A,B,C,B,C,B,C,C,A"
@@ -139,8 +139,8 @@ main = do
   let intcode' =
         newState (2 : tail code) (map ord . intercalate "\n" $ manualInputs)
   let intcode'' = runProgram intcode'
-  let outp = getOutput intcode''
-  print outp
+  let outp      = getOutput intcode''
+  print $ last outp
   -- putStrLn . map chr . ko
   -- let outp = getOutput . 
   -- putStrLn (intcodeToPicture intcode)

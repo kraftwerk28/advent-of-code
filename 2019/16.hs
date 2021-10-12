@@ -9,7 +9,9 @@ makePattern n = tail . cycle . concatMap (replicate n) $ pattern
 
 runPhase :: [Int] -> [Int]
 runPhase xs = map applyPat . take (length xs) $ [1 ..]
-  where applyPat nth = abs (sum (zipWith (*) (makePattern nth) xs)) `rem` 10
+ where
+  applyPat nth =
+    let pt = makePattern nth in (`rem` 10) . abs . sum $ zipWith (*) pt xs
 
 runPhasePart2 :: [Int] -> [Int]
 runPhasePart2 xs = memo
@@ -22,13 +24,13 @@ main = do
   numbers <- map digitToInt . init <$> getContents
 
   let part1List = iterate runPhase numbers !! 100
-  putStrLn . concatMap show . take 8 $ part1List
+  putStrLn . map intToDigit . take 8 $ part1List
 
   let skipAmount      = read . map intToDigit . take 7 $ numbers
   let numbersForPart2 = drop skipAmount . concat . replicate 10000 $ numbers
   -- This shit uses like a 6 gigs of ram on a real input, so be careful ok?
   putStrLn
-    . concatMap show
+    . map intToDigit
     . take 8
     . (!! 100)
     . iterate runPhasePart2

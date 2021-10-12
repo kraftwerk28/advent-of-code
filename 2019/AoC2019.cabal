@@ -66,8 +66,9 @@ executable 13
     , process
 
 executable 14
-  import:  deps
-  main-is: 14.hs
+  import:        deps
+  main-is:       14.hs
+  build-depends: containers
 
 executable 15
   import:        deps
@@ -75,10 +76,22 @@ executable 15
   build-depends: containers
 
 executable 16
-  import:        deps
-  main-is:       16.hs
-  build-depends: containers
+  import:  deps
+  main-is: 16.hs
 
 executable 17
   import:  deps
   main-is: 17.hs
+
+executable 18
+  import:  deps
+  main-is: 18.hs
+
+executable 23
+  import:  deps
+  main-is: 23.hs
+
+executable 24
+  import:  deps
+  main-is: 24.hs
+  build-depends: containers
