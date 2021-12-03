@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 infile="input/1.txt"
 (( result = 0 ))
 while read line; do
