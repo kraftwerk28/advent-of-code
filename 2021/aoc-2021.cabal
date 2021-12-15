@@ -1,0 +1,15 @@
+cabal-version: 2.4
+name:          aoc2021
+version:       0.1.0.0
+author:        kraftwerk28
+maintainer:    kefirchik3@gmail.com
+
+common deps
+  build-depends:
+    , base
+    , split
+    , containers
+
+executable 14
+  import:  deps
+  main-is: 14.hs
