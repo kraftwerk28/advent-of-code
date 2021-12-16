@@ -1,3 +1,6 @@
+from heapq import heappop, heappush
+
+
 def repeat_map(m):
     maxi = len(set(i for i, _ in m.keys()))
     maxj = len(set(j for _, j in m.keys()))
@@ -19,18 +22,22 @@ def part1(m):
     d = {p: 0xffff for p in m}
     s = (0, 0)
     d[s] = 0
-    for _ in range(4):
-        for c in m.keys():
-            i, j = c
-            nei = [
-                p for p in
-                ((i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1))
-                if p in m
-            ]
-            for n in nei:
-                tentative = d[c] + m[n]
-                if tentative < d[n]:
-                    d[n] = tentative
+    queue, visited = [(0, s)], {s}
+    # Dijkstra shortest path algorithm
+    # P.S. I wonder if it's possible to use DP
+    while queue:
+        _, c = heappop(queue)
+        i, j = c
+        visited.add(c)
+        neighbors = filter(
+            lambda p: p not in visited and p in m,
+            ((i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)),
+        )
+        for n in neighbors:
+            tentative = d[c] + m[n]
+            if tentative < d[n]:
+                d[n] = tentative
+                heappush(queue, (tentative, n))
     return d[(maxi, maxj)]
 
 
