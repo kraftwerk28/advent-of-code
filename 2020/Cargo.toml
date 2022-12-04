@@ -10,36 +10,36 @@ edition = "2018"
 regex = "*"
 
 [[bin]]
-name = "1"
-path = "1/main.rs"
+name = "01"
+path = "01/main.rs"
 
 [[bin]]
-name = "2"
-path = "2/main.rs"
+name = "02"
+path = "02/main.rs"
 
 [[bin]]
-name = "3"
-path = "3/main.rs"
+name = "03"
+path = "03/main.rs"
 
 [[bin]]
-name = "4"
-path = "4/main.rs"
+name = "04"
+path = "04/main.rs"
 
 [[bin]]
-name = "5"
-path = "5/main.rs"
+name = "05"
+path = "05/main.rs"
 
 [[bin]]
-name = "6"
-path = "6/main.rs"
+name = "06"
+path = "06/main.rs"
 
 [[bin]]
-name = "7"
-path = "7/main.rs"
+name = "07"
+path = "07/main.rs"
 
 [[bin]]
-name = "8"
-path = "8/main.rs"
+name = "08"
+path = "08/main.rs"
 
 [lib]
 name = "utils"

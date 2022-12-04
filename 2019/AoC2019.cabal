@@ -12,86 +12,86 @@ common deps
 
 executable 01
   import:  deps
-  main-is: 01.hs
+  main-is: 01/Main.hs
 
 executable 02
   import:  deps
-  main-is: 02.hs
+  main-is: 02/Main.hs
 
 executable 03
   import:  deps
-  main-is: 03.hs
+  main-is: 03/Main.hs
 
 executable 04
   import:  deps
-  main-is: 04.hs
+  main-is: 04/Main.hs
 
 executable 05
   import:  deps
-  main-is: 05.hs
+  main-is: 05/Main.hs
 
 executable 06
   import:  deps
-  main-is: 06.hs
+  main-is: 06/Main.hs
 
 executable 07
   import:  deps
-  main-is: 07.hs
+  main-is: 07/Main.hs
 
 executable 08
   import:  deps
-  main-is: 08.hs
+  main-is: 08/Main.hs
 
 executable 09
   import:  deps
-  main-is: 09.hs
+  main-is: 09/Main.hs
 
 executable 10
   import:  deps
-  main-is: 10.hs
+  main-is: 10/Main.hs
 
 executable 11
   import:  deps
-  main-is: 11.hs
+  main-is: 11/Main.hs
 
 executable 12
   import:  deps
-  main-is: 12.hs
+  main-is: 12/Main.hs
 
 executable 13
   import:        deps
-  main-is:       13.hs
+  main-is:       13/Main.hs
   build-depends:
     , containers
     , process
 
 executable 14
   import:        deps
-  main-is:       14.hs
+  main-is:       14/Main.hs
   build-depends: containers
 
 executable 15
   import:        deps
-  main-is:       15.hs
+  main-is:       15/Main.hs
   build-depends: containers
 
 executable 16
   import:  deps
-  main-is: 16.hs
+  main-is: 16/Main.hs
 
 executable 17
   import:  deps
-  main-is: 17.hs
+  main-is: 17/Main.hs
 
 executable 18
   import:  deps
-  main-is: 18.hs
+  main-is: 18/Main.hs
 
 executable 23
   import:  deps
-  main-is: 23.hs
+  main-is: 23/Main.hs
 
 executable 24
   import:  deps
-  main-is: 24.hs
+  main-is: 24/Main.hs
   build-depends: containers
