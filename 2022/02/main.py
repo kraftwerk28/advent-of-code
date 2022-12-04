@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys
 
 win = ["A Y", "B Z", "C X"]
