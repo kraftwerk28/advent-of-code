@@ -74,17 +74,6 @@ solve_part2(Crates, Commands) ->
     io:fwrite("Part 2: ~s~n", [Answer]).
 
 main(_) ->
-    % Crates = #{
-    %     1 => ["N", "Z"],
-    %     2 => ["D", "C", "M"],
-    %     3 => ["P"]
-    % },
-    % Commands = [
-    %     {1, 2, 1},
-    %     {3, 1, 3},
-    %     {2, 2, 1},
-    %     {1, 1, 2}
-    % ],
     Lines = read_lines(),
     {Crates, Commands} = parse_input(Lines),
     solve_part1(Crates, Commands),
