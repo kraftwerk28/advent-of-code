@@ -17,7 +17,7 @@ fn p1(forest: &Forest) {
             _ => 0,
         };
     }
-    println!("{}", ans);
+    println!("Part 1: {}", ans);
 }
 
 fn count_slopes(forest: &Forest, dir: (usize, usize)) -> usize {
@@ -41,7 +41,7 @@ fn p2(forest: &Forest) {
         .iter()
         .map(|dir| count_slopes(&forest, *dir))
         .fold(1, |acc, c| acc * c);
-    println!("{}", ans);
+    println!("Part 2: {}", ans);
 }
 
 fn main() {

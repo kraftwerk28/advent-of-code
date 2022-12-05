@@ -45,7 +45,7 @@ fn eval(instructions: &Vec<Instr>, eip: Option<i32>) -> (i32, bool) {
 
 fn p1(instructions: &Vec<Instr>) {
     let acc = eval(instructions, None);
-    println!("{}", acc.0);
+    println!("Part 1: {}", acc.0);
 }
 
 fn p2(instructions: &Vec<Instr>) {
@@ -80,7 +80,8 @@ fn p2(instructions: &Vec<Instr>) {
         }
     }
 
-    println!("eip: {}; acc: {}", eip, acc);
+    // println!("eip: {}; acc: {}", eip, acc);
+    println!("Part 2: {}", acc);
 }
 
 fn main() {

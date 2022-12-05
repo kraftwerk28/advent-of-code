@@ -22,7 +22,7 @@ fn p2() {
                 .count()
         })
         .sum::<usize>();
-    println!("{}", ans);
+    println!("Part 1: {}", ans);
 }
 
 fn p1() {
@@ -37,7 +37,7 @@ fn p1() {
             last.insert(c);
         }
     }
-    println!("{:?}", sets.iter().map(HashSet::len).sum::<usize>());
+    println!("Part 2: {:?}", sets.iter().map(HashSet::len).sum::<usize>());
 }
 
 fn main() {

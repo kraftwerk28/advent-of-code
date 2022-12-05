@@ -29,7 +29,7 @@ fn get_seat(code: &str, (l, h): (u32, u32)) -> u32 {
 }
 
 fn p1(seats: &Vec<Seat>) {
-    println!("{:?}", seats.iter().map(Seat::idx).max());
+    println!("Part 1: {}", seats.iter().map(Seat::idx).max().unwrap());
 }
 
 fn p2(seats: &Vec<Seat>) {
@@ -46,7 +46,7 @@ fn p2(seats: &Vec<Seat>) {
         }
         st = idx;
     }
-    println!("{}", st + 1);
+    println!("Part 2: {}", st + 1);
 }
 
 fn main() {

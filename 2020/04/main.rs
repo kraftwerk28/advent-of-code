@@ -19,7 +19,7 @@ impl Pass {
 
 fn p1(passports: &Vec<Pass>) {
     let ans = passports.iter().filter(|p| p.is_valid()).count();
-    println!("{}", ans);
+    println!("Part 1: {}", ans);
 }
 
 type Validator<'a> = (&'a str, &'a dyn Fn(&str) -> bool);
@@ -41,7 +41,7 @@ fn p2(passports: &Vec<Pass>, validators: &[Validator]) {
         })
         .count();
 
-    println!("{}", ans);
+    println!("Part 2: {}", ans);
 }
 
 fn main() {

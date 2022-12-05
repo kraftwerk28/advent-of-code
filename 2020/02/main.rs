@@ -10,7 +10,7 @@ fn p1(rules: &Vec<Rule>) {
             ((rule.0).0..=(rule.0).1).contains(&ccount)
         })
         .count();
-    println!("{}", ans);
+    println!("Part 1: {}", ans);
 }
 
 fn p2(rules: &Vec<Rule>) {
@@ -22,7 +22,7 @@ fn p2(rules: &Vec<Rule>) {
             a ^ b
         })
         .count();
-    println!("{}", ans);
+    println!("Part 2: {}", ans);
 }
 
 fn main() {

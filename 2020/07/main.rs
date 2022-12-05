@@ -45,5 +45,6 @@ fn main() {
     let my_bag = "shiny gold";
     let ans1 = bags.0.keys().filter(|k| bags.has(my_bag, k)).count();
     let ans2 = bags.countprice(my_bag);
-    println!("p1 = {}; p2 = {}", ans1, ans2);
+    println!("Part 1: {}", ans1);
+    println!("Part 2: {}", ans2);
 }

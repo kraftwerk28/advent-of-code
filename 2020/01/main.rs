@@ -2,7 +2,8 @@ fn s1(numbers: &Vec<i32>) {
     for n in numbers.iter() {
         for n2 in numbers.iter() {
             if n + n2 == 2020 {
-                println!("{} + {} = {}; {}", n, n2, n + n2, n * n2);
+                println!("Part 1: {}", n * n2);
+                // println!("{} + {} = {}; {}", n, n2, n + n2, n * n2);
                 return;
             }
         }
@@ -16,7 +17,8 @@ fn s2(numbers: &Vec<i32>) {
                 let s = n + n2 + n3;
                 if s == 2020 {
                     let m = n * n2 * n3;
-                    println!("{} + {} + {} = {}; {}", n, n2, n3, s, m);
+                    println!("Part 2: {}", m);
+                    // println!("{} + {} + {} = {}; {}", n, n2, n3, s, m);
                     return;
                 }
             }
