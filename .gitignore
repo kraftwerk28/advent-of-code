@@ -24,3 +24,6 @@ cabal.project.local~
 .HTF/
 .ghc.environment.*
 2020/17/main
+
+# Compiled binaries
+*/*/main
